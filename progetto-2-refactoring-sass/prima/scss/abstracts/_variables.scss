@@ -1,0 +1,32 @@
+// _variables.scss — le variabili di compilazione (PRIMA)
+// Nota: $color-primary compare 40+ volte nel progetto compilato,
+// perché Sass la SOSTITUISCE ovunque invece di lasciarla viva.
+
+$color-primary: #4338ca;
+$color-danger:  #dc2626;
+$color-border:  #e5e7eb;
+$color-text:    #111827;
+$color-text-dim: #6b7280;
+
+$gray-100: #f3f4f6;
+$gray-700: #374151;
+
+$radius: 6px;
+$space-1: 0.25rem;
+$space-2: 0.5rem;
+$space-3: 1rem;
+$space-4: 1.5rem;
+
+$shadow-1: 0 1px 3px rgba(0,0,0,0.1);
+$shadow-2: 0 4px 12px rgba(0,0,0,0.15);
+$shadow-3: 0 8px 24px rgba(0,0,0,0.18);
+
+// I breakpoint: la mappa che il Capitolo 12 manda in pensione.
+// 31 chiamate a respond-to() nel progetto, di cui 26 sono
+// COMPONENTI che sbirciano il viewport per indovinare il proprio spazio.
+$breakpoints: (
+  sm: 480px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px
+);

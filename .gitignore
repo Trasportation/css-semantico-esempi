@@ -1,0 +1,13 @@
+# Output della compilazione Sass del Progetto 2 (vedi README)
+before.css
+before.css.map
+*.css.map
+
+# Dipendenze: questo repository non ne ha, ma npx le scarica qui
+node_modules/
+
+# Sistema operativo ed editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

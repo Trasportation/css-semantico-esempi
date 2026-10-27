@@ -1,0 +1,76 @@
+/* button.css — il manifesto del libro in miniatura */
+
+@layer components {
+  .button {
+    /* API PUBBLICA (Capitolo 3): due token con default.
+       Le varianti ridefiniscono QUESTI, non le proprietà. */
+    --button-bg: var(--color-accent);
+    --button-color: var(--color-on-accent);
+
+    /* Derivazioni private (--_ = "non toccare da fuori").
+       Chi cambia --button-bg ottiene GRATIS l'hover coerente. */
+    --_bg-hover:  color-mix(in oklch, var(--button-bg), black 10%);
+    --_bg-active: color-mix(in oklch, var(--button-bg), black 18%);
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.5rem 1.25rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    background: var(--button-bg);
+    color: var(--button-color);
+    font-size: var(--text-m);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s, filter 0.15s;
+
+    /* ── VARIANTI: classi componibili (Capitolo 2) ──
+       markup: class="button outline" */
+    &.outline {
+      --button-bg: transparent;
+      --button-color: var(--color-accent);
+      --_bg-hover: var(--color-accent-subtle);
+      border-color: var(--color-accent);
+    }
+
+    &.subtle {
+      --button-bg: var(--color-accent-subtle);
+      --button-color: light-dark(var(--brand-30), var(--brand-80));
+    }
+
+    /* ── STATI ──
+       L'interazione condizionata allo stato (Capitolo 6):
+       l'hover esiste solo se nessuno stato lo vieta */
+    &:hover:not(.disable, .loading)  { background: var(--_bg-hover); }
+    &:active:not(.disable, .loading) { background: var(--_bg-active); }
+
+    &:focus-visible {
+      outline: 3px solid color-mix(in oklch, var(--color-accent), transparent 50%);
+      outline-offset: 2px;
+    }
+
+    /* Classe componibile E attributo nativo, stessa regola */
+    &.disable,
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &.loading {
+      cursor: progress;
+
+      &::before {
+        content: "";
+        inline-size: 1em;
+        aspect-ratio: 1;              /* Capitolo 9 */
+        border: 2px solid currentColor;
+        border-inline-start-color: transparent;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+    }
+  }
+
+  @keyframes spin { to { rotate: 360deg; } }
+}

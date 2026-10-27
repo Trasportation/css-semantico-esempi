@@ -1,0 +1,38 @@
+/* site-header.css — la nav che non ha bisogno dell'hamburger.
+   LA QUARTA LEVA (Capitolo 13): non abbiamo aggirato la media query,
+   abbiamo scelto un design che non la richiede. Con cinque voci si può;
+   con venticinque l'hamburger resta la scelta giusta. */
+
+@layer components {
+  .site-header {
+    display: flex;
+    flex-wrap: wrap;            /* la leva: può andare a capo */
+    align-items: center;
+    gap: var(--space-s) var(--space-m);
+    padding: var(--space-s) 0;
+
+    .logo {
+      margin-inline-end: auto;  /* spinge la nav a destra... finché c'è spazio */
+      font-weight: 700;
+      font-size: var(--text-l);
+      text-decoration: none;
+      color: var(--color-text);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+
+      a {
+        padding: 0.5rem 0.875rem;
+        border-radius: var(--radius);
+        text-decoration: none;
+        color: var(--color-text);
+
+        &:hover { background: var(--color-accent-subtle); }
+        &[aria-current="page"] { font-weight: 600; color: var(--color-accent); }
+      }
+    }
+  }
+}

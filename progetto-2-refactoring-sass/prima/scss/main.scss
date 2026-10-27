@@ -1,0 +1,11 @@
+// main.scss — 8 @use in fila.
+// L'ORDINE DEI FILE È L'ARCHITETTURA: implicita e fragile.
+// Riordinare questa lista cambia chi vince nei conflitti.
+
+@use "abstracts/variables";
+@use "abstracts/mixins";
+@use "base/reset";
+@use "base/typography";
+@use "components/button";
+@use "components/product-card";
+@use "utilities/spacing";

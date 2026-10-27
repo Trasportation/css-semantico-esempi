@@ -1,0 +1,37 @@
+/* card.css — portabile per costruzione (Capitolo 8):
+   risponde allo slot che il layout le consegna, non al viewport. */
+
+@layer components {
+  .card {
+    display: grid;
+    gap: var(--space-s);
+    padding: var(--space-m);
+    border: 1px solid var(--color-border);
+    border-radius: calc(var(--radius) * 1.5);
+    background: var(--color-surface);
+
+    img {
+      inline-size: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: var(--radius);
+    }
+
+    /* Fluida sul PROPRIO spazio: cqi, non vw (Capitolo 8) */
+    .title { font-size: clamp(1rem, 0.9rem + 1cqi, var(--text-l)); }
+    .meta  { font-size: var(--text-s); color: var(--color-text-dim); }
+
+    &.featured {
+      border-color: var(--color-accent);
+      box-shadow: var(--shadow-l);
+    }
+
+    /* La soglia si misura SUL COMPONENTE, non sui dispositivi:
+       26rem è la larghezza sotto cui il layout affiancato non respira */
+    @container (width >= 26rem) {
+      grid-template-columns: 40% 1fr;
+
+      img { aspect-ratio: 4 / 3; block-size: 100%; }
+    }
+  }
+}

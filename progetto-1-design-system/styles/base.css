@@ -1,0 +1,88 @@
+/* base.css — layer: base (Capitolo 11, passo 2)
+   IL FILE PIÙ IMPORTANTE: qui vive il design system.
+   Tutto il resto sono consumatori. */
+
+:root {
+  color-scheme: light dark;
+
+  /* ═══════════════ PRIMITIVI ═══════════════ */
+
+  /* L'UNICO colore deciso a mano in tutto il progetto.
+     TEST DEL BRAND: cambia questo valore e ricarica —
+     tutto deve riallinearsi da solo (Capitolo 11). */
+  --brand: #4f46e5;
+
+  /* Scala di tinte derivata dal brand (Capitolo 5).
+     L a gradini regolari; croma smorzato agli estremi,
+     perché un colore quasi-bianco a piena vividezza
+     esce dal gamut e sembra un evidenziatore. */
+  --brand-95: oklch(from var(--brand) 95% calc(c * 0.25) h);
+  --brand-80: oklch(from var(--brand) 80% calc(c * 0.6)  h);
+  --brand-60: oklch(from var(--brand) 60% c h);
+  --brand-45: oklch(from var(--brand) 45% c h);
+  --brand-30: oklch(from var(--brand) 30% calc(c * 0.8)  h);
+
+  /* Grigi "caldi": derivati dal brand con 'from', quindi
+     portano la sua tonalità. Cambiando --brand cambiano anche loro. */
+  --gray-98: oklch(from var(--brand) 98% 0.005 h);
+  --gray-90: oklch(from var(--brand) 90% 0.010 h);
+  --gray-60: oklch(from var(--brand) 60% 0.020 h);
+  --gray-25: oklch(from var(--brand) 25% 0.020 h);
+  --gray-15: oklch(from var(--brand) 15% 0.015 h);
+
+  /* Spazio fluido (Capitolo 4): scala con lo schermo entro limiti */
+  --space-s: clamp(0.75rem, 0.6rem + 0.75vw, 1.25rem);
+  --space-m: clamp(1.25rem, 1rem + 1.25vw, 2rem);
+  --space-l: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+
+  /* Tipografia: la componente rem accanto a vw è OBBLIGATORIA
+     per rispettare lo zoom testo dell'utente (accessibilità) */
+  --text-s:  0.875rem;
+  --text-m:  1rem;
+  --text-l:  clamp(1.15rem, 1rem + 0.75vw, 1.5rem);
+  --text-xl: clamp(1.75rem, 1.2rem + 2.75vw, 3rem);
+
+  --radius: 8px;
+  --shadow-m: 0 2px 8px oklch(0% 0 0 / 0.08);
+  --shadow-l: 0 8px 24px oklch(0% 0 0 / 0.12);
+
+  /* ═══════════════ SEMANTICI ═══════════════ */
+  /* I ruoli. I componenti consumano QUESTI, mai i gradini diretti. */
+
+  --color-bg:       light-dark(var(--gray-98), var(--gray-15));
+  --color-surface:  light-dark(white,          var(--gray-25));
+  --color-text:     light-dark(var(--gray-15), var(--gray-90));
+  --color-text-dim: var(--gray-60);
+  --color-border:   light-dark(var(--gray-90), oklch(from var(--brand) 35% 0.02 h));
+
+  /* Nel tema scuro l'accento sale a L 60%: su fondo scuro serve
+     un colore più chiaro per lo stesso risalto */
+  --color-accent:        light-dark(var(--brand-45), var(--brand-60));
+  --color-accent-subtle: light-dark(var(--brand-95), var(--brand-30));
+  --color-on-accent:     white;
+
+  --danger:        oklch(55% 0.19 25);
+  --color-success: oklch(55% 0.15 150);
+}
+
+/* Lo switch del tema tocca UNA proprietà: light-dark() fa il resto.
+   JS: document.documentElement.dataset.theme = 'dark' | 'light' */
+:root[data-theme="dark"]  { color-scheme: dark; }
+:root[data-theme="light"] { color-scheme: light; }
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: system-ui, sans-serif;
+  font-size: var(--text-m);
+  line-height: 1.5;
+}
+
+h1 { font-size: var(--text-xl); line-height: 1.1; text-wrap: balance; }
+h2 { font-size: var(--text-l);  line-height: 1.2; text-wrap: balance; }
+p  { text-wrap: pretty; }
+
+:where(a) {
+  color: var(--color-accent);
+  text-underline-offset: 0.15em;
+}

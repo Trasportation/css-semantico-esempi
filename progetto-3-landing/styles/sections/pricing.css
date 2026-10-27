@@ -1,0 +1,61 @@
+/* pricing.css — l'esercizio del Capitolo 9 promosso a produzione,
+   senza modifiche strutturali. Un sistema maturo si riconosce da
+   quanto poco c'è da scrivere la seconda volta. */
+
+@layer sections {
+  .pricing {
+    display: grid;
+    gap: var(--space-m);
+    /* Il pavimento a 18rem decide di fatto i "breakpoint":
+       3 → 2 → 1 colonne emergono dallo spazio */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  }
+
+  .plan {
+    /* SUBGRID: cinque figli, cinque righe della griglia madre.
+       La riga delle tagline si dimensiona sulla PIÙ LUNGA,
+       quella delle feature sulla lista PIÙ NUTRITA:
+       prezzi e bottoni cadono in riga da soli. */
+    display: grid;
+    grid-row: span 5;
+    grid-template-rows: subgrid;
+    row-gap: var(--space-s);
+
+    padding: var(--space-m);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-surface);
+
+    .plan-name  { font-weight: 700; font-size: var(--text-l); }
+    .tagline    { color: var(--color-text-dim); font-size: var(--text-s); }
+    .price      { font-size: 2rem; font-weight: 700; }
+    .price span { font-size: var(--text-s); font-weight: 400; color: var(--color-text-dim); }
+
+    ul { list-style: none; padding: 0; display: grid; gap: 0.375rem; font-size: var(--text-s); }
+    li::before { content: "✓ "; color: var(--color-success); font-weight: 700; }
+
+    .button { align-self: end; justify-content: center; }
+
+    /* La variante NON tocca il layout: scale() agisce DOPO il layout,
+       quindi il piano in evidenza sporge senza spostare le righe condivise */
+    &.featured {
+      border-color: var(--color-accent);
+      border-width: 2px;
+      scale: 1.03;
+    }
+  }
+
+  /* Reveal allo scroll: enhancement puro, mai fondamenta (Capitolo 10).
+     La base è visibile; se @supports non passa, non succede nulla. */
+  @supports (animation-timeline: view()) {
+    .pricing .plan {
+      animation: rise-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 50%;
+    }
+  }
+
+  @keyframes rise-in {
+    from { opacity: 0; translate: 0 1.5rem; }
+  }
+}

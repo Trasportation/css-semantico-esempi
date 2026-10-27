@@ -1,0 +1,18 @@
+/* ═══════════════════════════════════════════════════════════
+   main.css — l'indice del progetto (Capitolo 7)
+   L'unico file collegato dall'HTML. Qui si dichiara l'ordine
+   dei layer: la precedenza è una DECISIONE, non un effetto
+   collaterale dell'ordine dei file.
+   ═══════════════════════════════════════════════════════════ */
+
+@layer reset, base, layout, components, utilities;
+
+@import url("reset.css")             layer(reset);
+@import url("base.css")              layer(base);
+@import url("layout.css")            layer(layout);
+@import url("components/button.css") layer(components);
+@import url("components/field.css")  layer(components);
+@import url("components/card.css")   layer(components);
+@import url("components/badge.css")  layer(components);
+@import url("components/alert.css")  layer(components);
+@import url("utilities.css")         layer(utilities);

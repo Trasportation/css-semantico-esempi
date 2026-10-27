@@ -1,0 +1,11 @@
+/* main.css — DOPO la migrazione (Capitolo 12, passo 6)
+   Gli @use sono diventati @import con layer, e l'ordine dei FILE
+   non decide più niente: la precedenza la dichiara la prima riga. */
+
+@layer vendor, reset, base, layout, components, utilities;
+
+@import url("reset.css")                  layer(reset);
+@import url("base.css")                   layer(base);
+@import url("components/button.css")      layer(components);
+@import url("components/product-card.css") layer(components);
+@import url("utilities.css")              layer(utilities);

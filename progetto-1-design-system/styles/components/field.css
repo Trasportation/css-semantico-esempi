@@ -1,0 +1,49 @@
+/* field.css — la UX di validazione vive nel CSS (Capitolo 6).
+   Nessun listener, nessuna classe .field--error da sincronizzare. */
+
+@layer components {
+  .field {
+    display: grid;
+    gap: 0.375rem;
+
+    label { font-size: var(--text-s); font-weight: 500; }
+
+    input, textarea, select {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      color: var(--color-text);
+
+      &:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 1px;
+      }
+    }
+
+    .error-message {
+      display: none;
+      font-size: var(--text-s);
+      color: var(--danger);
+    }
+
+    /* Stati RILEVATI dal DOM, non dichiarati da JS */
+    &:has(input:focus-visible) label { color: var(--color-accent); }
+
+    /* :user-invalid (non :invalid): scatta solo DOPO l'interazione,
+       altrimenti il form nascerebbe già "in errore" */
+    &:has(input:user-invalid) {
+      label { color: var(--danger); }
+      input { border-color: var(--danger); }
+      .error-message { display: block; }
+    }
+
+    /* Lo stato DICHIARATO da JS (es. validazione server) convive
+       nelle stesse regole: i due mondi non si ostacolano */
+    &.server-error {
+      label { color: var(--danger); }
+      input { border-color: var(--danger); }
+      .error-message { display: block; }
+    }
+  }
+}

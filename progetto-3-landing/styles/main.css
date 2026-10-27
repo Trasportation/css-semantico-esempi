@@ -1,0 +1,17 @@
+/* main.css — Progetto 3: landing page SENZA media query dimensionali.
+   Costruita SOPRA il design system del Progetto 1: una landing non è
+   un progetto, è una pagina di un sistema. */
+
+@layer reset, base, layout, components, sections;
+
+@import url("../../progetto-1-design-system/styles/reset.css")  layer(reset);
+@import url("../../progetto-1-design-system/styles/base.css")   layer(base);
+@import url("../../progetto-1-design-system/styles/layout.css") layer(layout);
+@import url("../../progetto-1-design-system/styles/components/button.css") layer(components);
+
+@import url("components/site-header.css")  layer(components);
+@import url("components/feature-card.css") layer(components);
+@import url("sections/hero.css")           layer(sections);
+@import url("sections/features.css")       layer(sections);
+@import url("sections/pricing.css")        layer(sections);
+@import url("sections/footer.css")         layer(sections);

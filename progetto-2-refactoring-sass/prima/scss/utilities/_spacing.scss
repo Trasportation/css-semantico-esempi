@@ -1,0 +1,13 @@
+// _spacing.scss — il loop che genera 32 utility.
+// Il censimento del Capitolo 12 rivela che nei template
+// ne sono usate NOVE. Le altre 23 smettono di esistere.
+
+@use "../abstracts/variables" as v;
+
+@each $name, $size in (1: 0.25rem, 2: 0.5rem, 3: 1rem, 4: 1.5rem,
+                       5: 2rem, 6: 2.5rem, 7: 3rem, 8: 4rem) {
+  .mt-#{$name} { margin-top: $size; }
+  .mb-#{$name} { margin-bottom: $size; }
+  .pt-#{$name} { padding-top: $size; }
+  .pb-#{$name} { padding-bottom: $size; }
+}

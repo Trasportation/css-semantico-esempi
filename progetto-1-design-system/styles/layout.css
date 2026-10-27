@@ -1,0 +1,43 @@
+/* layout.css — layer: layout (Capitolo 11, passo 3)
+   Infrastruttura, non opinione. Nessuna media query dimensionale. */
+
+/* Il contenitore auto-centrato (Capitolo 4): "largo al massimo 70rem,
+   e comunque mai più del contenitore meno i margini fluidi" */
+.wrapper {
+  inline-size: min(100% - 2 * var(--space-m), 70rem);
+  margin-inline: auto;
+}
+
+/* La griglia intrinseca (Capitolo 9): il numero di colonne EMERGE
+   dallo spazio. Il min() interno evita l'overflow su schermi minuscoli. */
+.card-grid {
+  display: grid;
+  gap: var(--space-m);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+
+  /* IL CONTRATTO tra layout e componenti (Capitolo 8):
+     il layout consegna slot MISURABILI, i componenti vi rispondono.
+     Nessuno dei due conosce l'altro. */
+  > * { container-type: inline-size; }
+}
+
+/* La sidebar a wrap pilotato (Capitolo 9): il "breakpoint" emerge
+   dai vincoli di contenuto, non da una soglia scritta a mano */
+.with-sidebar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-l);
+
+  > aside { flex: 1 1 15rem;  container-type: inline-size; }
+  > main  { flex: 999 1 60%;  min-inline-size: 60%; container-type: inline-size; }
+}
+
+.stack { display: grid; gap: var(--space-s); }
+
+/* Guscio di pagina: footer sempre in fondo, anche a pagina corta.
+   dvh (non vh) tiene conto delle barre a scomparsa dei browser mobili. */
+.page-shell {
+  display: grid;
+  min-block-size: 100dvh;
+  grid-template-rows: auto 1fr auto;
+}

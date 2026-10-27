@@ -1,0 +1,41 @@
+/* feature-card.css — LA SCENA MADRE del capitolo (par. 13.4):
+   due sistemi che si adattano indipendentemente. La griglia decide
+   quante colonne fare, la card decide come disporsi nello slot che
+   le tocca — senza che nessuno dei due sappia dell'altro.
+   La classe di bug "ho cambiato la griglia e le card si sono rotte"
+   qui non può esistere: manca il canale con cui propagarsi. */
+
+@layer components {
+  .feature-card {
+    display: grid;
+    gap: var(--space-s);
+    padding: var(--space-m);
+    border: 1px solid var(--color-border);
+    border-radius: calc(var(--radius) * 1.5);
+    background: var(--color-surface);
+
+    .icon {
+      inline-size: 2.5rem;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius);
+      background: var(--color-accent-subtle);
+      color: var(--color-accent);
+      font-size: 1.25rem;
+    }
+
+    /* cqi: fluida sul PROPRIO spazio, non sul viewport */
+    h3 { font-size: clamp(1.05rem, 0.95rem + 0.5cqi, 1.3rem); }
+
+    p { color: var(--color-text-dim); font-size: var(--text-s); }
+
+    /* Con slot largo: icona a lato. La soglia è misurata sulla card. */
+    @container (width >= 24rem) {
+      grid-template-columns: auto 1fr;
+      column-gap: var(--space-m);
+
+      .icon { grid-row: span 2; align-self: start; }
+    }
+  }
+}

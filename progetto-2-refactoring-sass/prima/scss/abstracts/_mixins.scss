@@ -1,0 +1,44 @@
+// _mixins.scss — le tre sorti del Capitolo 12
+
+@use "sass:map";
+@use "variables" as v;
+
+// (A) MIXIN COMPORTAMENTALE → diventa una regola condivisa nel layer base
+@mixin focus-ring {
+  outline: 2px solid v.$color-primary;
+  outline-offset: 2px;
+}
+
+// (B) MIXIN PARAMETRICO → diventa un'API di custom properties.
+//     Attenzione: ogni @include DUPLICA le dichiarazioni nell'output.
+@mixin button-variant($bg, $color) {
+  background: $bg;
+  color: $color;
+  border: 1px solid transparent;
+
+  &:hover { background: darken($bg, 10%); }
+  &:active { background: darken($bg, 18%); }
+}
+
+// (C) MIXIN DI BREAKPOINT → censire prima di tradurre:
+//     pagina → media query, componente → container query
+@mixin respond-to($bp) {
+  @media (min-width: map.get(v.$breakpoints, $bp)) {
+    @content;
+  }
+}
+
+// Il "mixin ostinato" dell'esercizio: fa DUE mestieri
+// (una scala di valori + un comportamento). Non va tradotto: va SCIOLTO.
+@mixin card-elevation($level: 1, $interactive: false) {
+  @if $level == 1 { box-shadow: v.$shadow-1; }
+  @if $level == 2 { box-shadow: v.$shadow-2; }
+
+  @if $interactive {
+    transition: box-shadow 0.2s, transform 0.2s;
+    &:hover {
+      box-shadow: v.$shadow-3;
+      transform: translateY(-2px);
+    }
+  }
+}

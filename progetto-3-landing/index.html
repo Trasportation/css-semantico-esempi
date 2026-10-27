@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Landing senza media query · CSS Semantico</title>
+<link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="page-shell">
+
+<div class="wrapper">
+  <header class="site-header">
+    <a href="#" class="logo">Acme</a>
+    <nav>
+      <a href="#features" aria-current="page">Funzionalità</a>
+      <a href="#pricing">Prezzi</a>
+      <a href="#docs">Documentazione</a>
+      <a href="#blog">Blog</a>
+      <a href="#contatti">Contatti</a>
+    </nav>
+  </header>
+</div>
+
+<main>
+
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <div class="wrapper">
+      <div class="copy">
+        <h1>Il layout che emerge invece di essere enumerato</h1>
+        <p class="subtitle">
+          Questa pagina è responsive dal telefono al monitor ultrawide
+          senza una sola media query dimensionale. Ridimensiona la finestra
+          a larghezze assurde: non troverai stati intermedi infelici.
+        </p>
+        <div class="actions">
+          <a href="#pricing" class="button">Guarda i piani</a>
+          <a href="#features" class="button outline">Come funziona</a>
+        </div>
+      </div>
+      <div class="visual">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3Crect width='4' height='3' fill='%23d4d4d8'/%3E%3C/svg%3E" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FEATURES — la scena madre ══ -->
+  <section id="features" class="wrapper" style="padding-block: var(--space-l)">
+    <h2 style="margin-bottom: var(--space-m)">Tre leve, zero breakpoint</h2>
+
+    <div class="features">
+      <article class="feature-card">
+        <div class="icon">◧</div>
+        <div>
+          <h3>Fluido con limiti</h3>
+          <p>clamp() per tipografia e spazi: i valori scalano, gli estremi proteggono.</p>
+        </div>
+      </article>
+      <article class="feature-card">
+        <div class="icon">▦</div>
+        <div>
+          <h3>Griglie intrinseche</h3>
+          <p>Il numero di colonne emerge dallo spazio disponibile, non da una soglia.</p>
+        </div>
+      </article>
+      <article class="feature-card">
+        <div class="icon">◱</div>
+        <div>
+          <h3>Container queries</h3>
+          <p>Ogni componente risponde al proprio contenitore, ovunque venga collocato.</p>
+        </div>
+      </article>
+      <article class="feature-card">
+        <div class="icon">◈</div>
+        <div>
+          <h3>Design che si adatta</h3>
+          <p>La quarta leva non è tecnica: scegliere pattern che non richiedono soglie.</p>
+        </div>
+      </article>
+      <article class="feature-card">
+        <div class="icon">◐</div>
+        <div>
+          <h3>Tema a runtime</h3>
+          <p>light-dark() e token: il tema cambia toccando una sola proprietà.</p>
+        </div>
+      </article>
+      <article class="feature-card">
+        <div class="icon">◇</div>
+        <div>
+          <h3>Zero dipendenze</h3>
+          <p>Nessuna build, nessun framework: solo il browser e il linguaggio.</p>
+        </div>
+      </article>
+    </div>
+
+    <p class="text-dim" style="margin-top: var(--space-m); font-size: var(--text-s)">
+      Allarga lentamente la finestra: a un certo punto le card passano
+      <em>tutte insieme</em> all'icona laterale, senza che la griglia se ne accorga.
+      Due sistemi che si adattano indipendentemente.
+    </p>
+  </section>
+
+  <!-- ══ PRICING — subgrid ══ -->
+  <section id="pricing" class="wrapper" style="padding-block: var(--space-l)">
+    <h2 style="margin-bottom: var(--space-m)">Prezzi</h2>
+
+    <div class="pricing">
+      <article class="plan">
+        <div class="plan-name">Base</div>
+        <div class="tagline">Per iniziare.</div>
+        <div class="price">9 € <span>/mese</span></div>
+        <ul>
+          <li>Un progetto</li>
+          <li>Supporto via email</li>
+        </ul>
+        <a href="#" class="button outline">Scegli Base</a>
+      </article>
+
+      <article class="plan featured">
+        <div class="plan-name">Pro</div>
+        <div class="tagline">Per chi lavora sul serio e ha bisogno di più margine, con una tagline volutamente lunga per mostrare l'allineamento.</div>
+        <div class="price">29 € <span>/mese</span></div>
+        <ul>
+          <li>Progetti illimitati</li>
+          <li>Supporto prioritario</li>
+          <li>Accesso API</li>
+          <li>Statistiche avanzate</li>
+        </ul>
+        <a href="#" class="button">Scegli Pro</a>
+      </article>
+
+      <article class="plan">
+        <div class="plan-name">Team</div>
+        <div class="tagline">Per gruppi di lavoro.</div>
+        <div class="price">79 € <span>/mese</span></div>
+        <ul>
+          <li>Tutto di Pro</li>
+          <li>Utenti illimitati</li>
+          <li>SSO</li>
+        </ul>
+        <a href="#" class="button outline">Scegli Team</a>
+      </article>
+    </div>
+
+    <p class="text-dim" style="margin-top: var(--space-m); font-size: var(--text-s)">
+      Le tagline hanno lunghezze diverse e le liste conteggi diversi, ma prezzi e
+      bottoni restano allineati: è <code>subgrid</code> al lavoro.
+    </p>
+  </section>
+
+</main>
+
+<!-- ══ FOOTER — auto-fill ══ -->
+<footer class="site-footer">
+  <div class="wrapper">
+    <div class="columns">
+      <div>
+        <h4>Prodotto</h4>
+        <ul><li><a href="#">Funzionalità</a></li><li><a href="#">Prezzi</a></li><li><a href="#">Changelog</a></li></ul>
+      </div>
+      <div>
+        <h4>Risorse</h4>
+        <ul><li><a href="#">Documentazione</a></li><li><a href="#">Guide</a></li><li><a href="#">API</a></li></ul>
+      </div>
+      <div>
+        <h4>Azienda</h4>
+        <ul><li><a href="#">Chi siamo</a></li><li><a href="#">Blog</a></li><li><a href="#">Lavora con noi</a></li></ul>
+      </div>
+      <div>
+        <h4>Legale</h4>
+        <ul><li><a href="#">Privacy</a></li><li><a href="#">Termini</a></li><li><a href="#">Cookie</a></li></ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Acme</span>
+      <span>Esempio dal libro <strong>CSS Semantico</strong> — csssemantico.it</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

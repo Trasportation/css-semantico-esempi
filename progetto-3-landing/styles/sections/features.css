@@ -1,0 +1,12 @@
+/* features.css — la griglia esterna della "scena madre" */
+
+@layer sections {
+  .features {
+    display: grid;
+    gap: var(--space-m);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+
+    /* Il contratto: ogni cella è un contenitore misurabile */
+    > * { container-type: inline-size; }
+  }
+}

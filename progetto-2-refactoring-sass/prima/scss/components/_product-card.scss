@@ -1,0 +1,37 @@
+// _product-card.scss — il componente BEM del paragrafo 2.8
+// &__ e &-- non hanno traduzione nativa: vanno RIPENSATI.
+
+@use "../abstracts/variables" as v;
+@use "../abstracts/mixins" as m;
+
+.product-card {
+  border: 1px solid v.$color-border;
+  border-radius: 8px;
+  @include m.card-elevation(1, true);
+
+  &--featured {
+    border-color: v.$color-primary;
+    box-shadow: v.$shadow-2;
+  }
+
+  &--soldout { opacity: 0.6; }
+
+  &__image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  &__title { font-size: 1.1rem; }
+  &__price { font-weight: 700; }
+
+  // La regola a doppio riferimento: la più macchinosa dell'originale
+  &--soldout &__price { text-decoration: line-through; }
+
+  // Il componente che sbircia il VIEWPORT per indovinare
+  // il proprio spazio: uno dei 26 casi da convertire
+  @include m.respond-to(md) {
+    display: grid;
+    grid-template-columns: 40% 1fr;
+  }
+}

@@ -1,0 +1,64 @@
+/* product-card.css — passo 5: il refactoring BEM del paragrafo 2.8.
+   È l'unico passo che tocca l'HTML.
+
+   PRIMA:  class="product-card product-card--featured product-card--soldout"
+   DOPO:   class="product-card featured soldout"                              */
+
+@layer components {
+  .product-card {
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    box-shadow: var(--shadow-1);
+
+    /* Gli elementi perdono il prefisso: lo scope lo dà il nesting */
+    img {
+      inline-size: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .title { font-size: 1.1rem; }
+    .price { font-weight: 700; }
+
+    /* Le varianti diventano composizioni */
+    &.featured {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-2);
+    }
+
+    /* La regola a doppio riferimento (&--soldout &__price) diventa
+       un annidamento che si legge da solo */
+    &.soldout {
+      opacity: 0.6;
+
+      .price { text-decoration: line-through; }
+    }
+
+    /* PONTE TEMPORANEO per la migrazione dei template (Capitolo 12).
+       :is() accetta vecchio e nuovo nome insieme; quando
+       `grep "product-card--" templates/` torna vuoto, si rimuove.
+       Scadenza: fine migrazione template. */
+    &:is(.featured, .product-card--featured) { border-color: var(--color-primary); }
+
+    /* Il componente non sbircia più il viewport: risponde al
+       PROPRIO spazio, quindi funziona anche in sidebar e modale */
+    @container (width >= 28rem) {
+      display: grid;
+      grid-template-columns: 40% 1fr;
+      gap: var(--space-m);
+    }
+  }
+
+  /* Il "mixin ostinato" sciolto (esercizio del Capitolo 12):
+     la scala era TOKEN, il comportamento è una classe componibile */
+  .elevated { box-shadow: var(--shadow-1); }
+
+  .interactive {
+    transition: box-shadow 0.2s, translate 0.2s;
+
+    &:hover {
+      box-shadow: var(--shadow-3);
+      translate: 0 -2px;
+    }
+  }
+}

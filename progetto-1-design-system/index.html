@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design system — pagina di collaudo · CSS Semantico</title>
+<link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="page-shell">
+
+<header class="wrapper" style="padding-block: var(--space-m)">
+  <div style="display:flex; flex-wrap:wrap; gap:var(--space-s); align-items:center">
+    <h1 style="margin-inline-end:auto">Pagina di collaudo</h1>
+    <button class="button outline" id="theme-toggle">Cambia tema</button>
+  </div>
+  <p class="text-dim">
+    Ogni componente, in ogni variante e stato. È il laboratorio del design system:
+    qui si eseguono i quattro test del Capitolo 11.
+  </p>
+</header>
+
+<main class="wrapper flow" style="padding-block: var(--space-l)">
+
+  <!-- ══ TEST DEL BRAND ══ -->
+  <section class="flow">
+    <h2>Test del brand</h2>
+    <p>Cambia <code>--brand</code> in <code>base.css</code>: tutto deve riallinearsi da solo.</p>
+    <div style="display:flex; gap:var(--space-s); flex-wrap:wrap">
+      <button class="button" onclick="document.documentElement.style.setProperty('--brand','#4f46e5')">Indaco</button>
+      <button class="button" onclick="document.documentElement.style.setProperty('--brand','#059669')">Verde</button>
+      <button class="button" onclick="document.documentElement.style.setProperty('--brand','#ea580c')">Arancione</button>
+      <button class="button" onclick="document.documentElement.style.setProperty('--brand','#db2777')">Rosa</button>
+    </div>
+  </section>
+
+  <!-- ══ BUTTON ══ -->
+  <section class="flow">
+    <h2>Button</h2>
+    <div style="display:flex; gap:var(--space-s); flex-wrap:wrap; align-items:center">
+      <button class="button">Predefinito</button>
+      <button class="button outline">Outline</button>
+      <button class="button subtle">Subtle</button>
+      <button class="button disable">Disabilitato</button>
+      <button class="button loading">In caricamento</button>
+      <button class="button outline loading">Outline + loading</button>
+    </div>
+    <p class="text-dim">
+      Markup: <code>class="button outline loading"</code> — varianti e stati si compongono
+      liberamente, senza esplosione di nomi.
+    </p>
+  </section>
+
+  <!-- ══ BADGE ══ -->
+  <section class="flow">
+    <h2>Badge</h2>
+    <div style="display:flex; gap:var(--space-s); flex-wrap:wrap">
+      <span class="badge">Predefinito</span>
+      <span class="badge success">Attivo</span>
+      <span class="badge danger">Scaduto</span>
+    </div>
+  </section>
+
+  <!-- ══ ALERT ══ -->
+  <section class="flow">
+    <h2>Alert</h2>
+    <div class="alert">
+      <span>Messaggio informativo.</span>
+      <button class="close" aria-label="Chiudi">&times;</button>
+    </div>
+    <div class="alert success">
+      <span>Operazione completata.</span>
+      <button class="close" aria-label="Chiudi">&times;</button>
+    </div>
+    <div class="alert danger">
+      <span>Qualcosa non ha funzionato.</span>
+      <button class="close" aria-label="Chiudi">&times;</button>
+    </div>
+  </section>
+
+  <!-- ══ FIELD ══ -->
+  <section class="flow">
+    <h2>Field</h2>
+    <p class="text-dim">
+      Prova a scrivere un'email non valida e a uscire dal campo: la UX di errore
+      è tutta CSS, nessun JavaScript.
+    </p>
+    <form class="flow" style="max-inline-size:26rem" novalidate>
+      <div class="field">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" required>
+        <span class="error-message">Campo obbligatorio.</span>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" required placeholder="nome@esempio.it">
+        <span class="error-message">Inserisci un indirizzo email valido.</span>
+      </div>
+      <div class="field server-error">
+        <label for="user">Username (esempio di errore da server)</label>
+        <input type="text" id="user" value="mario">
+        <span class="error-message">Questo username è già in uso.</span>
+      </div>
+      <button class="button" type="submit">Invia</button>
+    </form>
+  </section>
+
+  <!-- ══ CARD + TEST DELLO SPAZIO ══ -->
+  <section class="flow">
+    <h2>Card — test dello spazio</h2>
+    <p class="text-dim">
+      La stessa card in griglia e in sidebar: si adatta da sola, senza classi aggiuntive.
+    </p>
+
+    <div class="card-grid">
+      <article class="card">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23ccc'/%3E%3C/svg%3E" alt="">
+        <h3 class="title">Card in griglia</h3>
+        <p class="meta">Slot largo: layout affiancato</p>
+      </article>
+      <article class="card featured">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23ccc'/%3E%3C/svg%3E" alt="">
+        <h3 class="title">Card in evidenza</h3>
+        <p class="meta">Variante componibile: <code>featured</code></p>
+      </article>
+      <article class="card">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23ccc'/%3E%3C/svg%3E" alt="">
+        <h3 class="title">Terza card</h3>
+        <p class="meta">Stesso CSS, contesto diverso</p>
+      </article>
+    </div>
+
+    <div class="with-sidebar" style="margin-block-start:var(--space-l)">
+      <main>
+        <article class="card">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23ccc'/%3E%3C/svg%3E" alt="">
+          <h3 class="title">Card in colonna principale</h3>
+          <p class="meta">Spazio ampio → orizzontale</p>
+        </article>
+      </main>
+      <aside>
+        <article class="card">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23ccc'/%3E%3C/svg%3E" alt="">
+          <h3 class="title">La stessa card in sidebar</h3>
+          <p class="meta">Spazio stretto → impilata</p>
+        </article>
+      </aside>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrapper text-dim" style="padding-block:var(--space-m); font-size:var(--text-s)">
+  Design system del libro <strong>CSS Semantico</strong> — csssemantico.it
+</footer>
+
+<script>
+  // Tema: cambia UNA proprietà, light-dark() fa il resto (Capitolo 5)
+  document.getElementById('theme-toggle').addEventListener('click', () => {
+    const r = document.documentElement;
+    r.dataset.theme = r.dataset.theme === 'dark' ? 'light' : 'dark';
+  });
+
+  // Chiusura alert: lo stato è una classe atomica (Capitolo 2)
+  document.querySelectorAll('.alert .close').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const alert = btn.closest('.alert');
+      alert.classList.add('closing');
+      alert.addEventListener('transitionend', () => alert.remove(), { once: true });
+    });
+  });
+</script>
+</body>
+</html>

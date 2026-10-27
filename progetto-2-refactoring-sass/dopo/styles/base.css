@@ -1,0 +1,44 @@
+/* base.css — passo 1 e 2: variabili → custom properties,
+   funzioni colore → color-mix() e RCS */
+
+:root {
+  color-scheme: light dark;
+
+  /* Le variabili Sass diventano token VIVI: cambiarli a runtime
+     (tema, sezione, JS) ora è possibile — prima serviva ricompilare */
+  --color-primary: #4338ca;
+  --color-danger:  oklch(55% 0.19 25);
+  --color-border:  #e5e7eb;
+  --color-text:    #111827;
+  --color-text-dim: #6b7280;
+
+  --radius: 6px;
+
+  /* La scala di ombre: era un @if dentro un mixin,
+     ora è ciò che è sempre stata — una scala di valori */
+  --shadow-1: 0 1px 3px oklch(0% 0 0 / 0.1);
+  --shadow-2: 0 4px 12px oklch(0% 0 0 / 0.15);
+  --shadow-3: 0 8px 24px oklch(0% 0 0 / 0.18);
+
+  /* Spazio fluido: i quattro gradini fissi diventano tre fluidi */
+  --space-s: clamp(0.75rem, 0.6rem + 0.75vw, 1.25rem);
+  --space-m: clamp(1.25rem, 1rem + 1.25vw, 2rem);
+  --space-l: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+/* Le tre media query della tipografia → UNA formula fluida.
+   Nessuno scatto, nessun dispositivo "dimenticato" tra i breakpoint. */
+h1 { font-size: clamp(1.75rem, 1.2rem + 2.75vw, 3rem); line-height: 1.1; }
+
+/* Il mixin COMPORTAMENTALE focus-ring: non diventa una classe da
+   ricordarsi di applicare, ma una regola condivisa a specificità zero */
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}

@@ -1,0 +1,22 @@
+/* badge.css — quattro righe di logica, tutto il metodo del libro:
+   UN token di API, sfondo e testo entrambi DERIVATI da esso. */
+
+@layer components {
+  .badge {
+    --badge-hue: var(--color-accent);
+
+    display: inline-block;
+    padding: 0.125rem 0.625rem;
+    border-radius: 999px;
+    font-size: var(--text-s);
+
+    /* Trasparenza derivata (Capitolo 5) invece di un secondo token */
+    background: color-mix(in oklch, var(--badge-hue), transparent 85%);
+    /* Luminosità per tema dentro il canale L della RCS */
+    color: oklch(from var(--badge-hue) light-dark(35%, 85%) c h);
+
+    /* Aggiungere una variante domani = una riga */
+    &.success { --badge-hue: var(--color-success); }
+    &.danger  { --badge-hue: var(--danger); }
+  }
+}

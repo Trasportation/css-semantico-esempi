@@ -1,0 +1,9 @@
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

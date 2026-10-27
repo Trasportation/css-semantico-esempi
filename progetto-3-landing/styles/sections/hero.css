@@ -1,0 +1,48 @@
+/* hero.css — fluido in ogni direzione.
+   Il momento in cui l'hero "va a capo" non è a 768px né a 1024px:
+   è quando 24rem + 18rem + gap non ci stanno più, cioè quando
+   IL CONTENUTO lo chiede. */
+
+@layer sections {
+  .hero {
+    padding-block: clamp(3rem, 2.14rem + 4.29vw, 6rem);
+
+    .wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-l);
+    }
+
+    .copy   { flex: 1 1 24rem; }   /* il testo: base generosa */
+    .visual { flex: 1 1 18rem; }   /* l'immagine: base minore */
+
+    .visual img {
+      inline-size: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: calc(var(--radius) * 2);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 1.43rem + 2.86vw, 4rem);
+      line-height: 1.05;
+      text-wrap: balance;   /* le righe si pareggiano: addio <br> a mano */
+    }
+
+    .subtitle {
+      font-size: var(--text-l);
+      color: var(--color-text-dim);
+      max-inline-size: 55ch;   /* la MISURA TIPOGRAFICA come vincolo */
+      text-wrap: pretty;
+      margin-block-start: var(--space-s);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-s);
+      margin-block-start: var(--space-m);
+    }
+  }
+}

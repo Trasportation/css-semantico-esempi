@@ -1,0 +1,37 @@
+/* button.css — passo 3: il mixin parametrico diventa un'API.
+   Il mixin DUPLICAVA le dichiarazioni a ogni chiamata;
+   l'API le scrive UNA volta. Su questo progetto: -11% di CSS. */
+
+@layer components {
+  .button {
+    --button-bg: var(--color-primary);
+    --button-color: white;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.5rem 1.5rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    background: var(--button-bg);
+    color: var(--button-color);
+    cursor: pointer;
+
+    /* darken() → color-mix(): non solo equivalente, ma VIVO —
+       se --button-bg cambia, hover e active seguono */
+    &:hover  { background: color-mix(in oklch, var(--button-bg), black 10%); }
+    &:active { background: color-mix(in oklch, var(--button-bg), black 18%); }
+
+    /* Le varianti ridefiniscono l'API, non le proprietà */
+    &.danger    { --button-bg: var(--color-danger); }
+    &.secondary {
+      --button-bg: transparent;
+      --button-color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    /* %button-base esteso da .icon-button → composizione nel markup:
+       class="button icon-button" */
+    &.icon-only { padding: 0.5rem; }
+  }
+}

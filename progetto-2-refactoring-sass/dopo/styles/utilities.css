@@ -1,0 +1,16 @@
+/* utilities.css — passo 5: il loop @each va in pensione.
+   Censimento sui template: delle 32 classi generate ne erano
+   usate NOVE. Eccole, scritte a mano. Le altre 23 non esistono più. */
+
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.pb-3 { padding-bottom: 1rem; }
+.pt-3 { padding-top: 1rem; }
+.pb-4 { padding-bottom: 1.5rem; }
+
+/* Nota: con gap (Capitolo 9) e le custom properties, la domanda
+   onesta è se servissero davvero anche queste nove. */
